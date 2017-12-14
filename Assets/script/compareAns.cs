@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using SimpleJSON;
+using LitJson;
 
-public class countAns : MonoBehaviour {
+public class compareAns : MonoBehaviour {
 
 	public GameObject SkillFrameStairs;
 	public GameObject SkillFramePCH;
@@ -29,57 +31,104 @@ public class countAns : MonoBehaviour {
 	[SerializeField] private Text NumPCH02T = null;
 	[SerializeField] private Text Result = null;
 
-	public class answerData
-	{
-		public string func;
-		public int n;
-		public int m;
-		public int mWrong;
+	public int currentProblem = 0;
+	private int currentFunc;
+
+	private int currentN;
+	private int currentM;
+	private int currentResult;
+
+	public int ansFunc;
+	public int ansN;
+	public int ansM;
+	public int ansResult;
+	public int feedbackNum;
+
+
+	private string jsonString;
+	private JsonData jsonData;
+	void Start () {
+		
+		searchAnswer ();
 	}
 
-	public void load()
-	{
-		//讀取json檔案並轉存成文字格式
-		StreamReader file = new StreamReader(System.IO.Path.Combine(Application.streamingAssetsPath, "Answers"));
-		string loadJson = file.ReadToEnd();
-		file.Close();
+	public void searchAnswer(){
+		jsonString = File.ReadAllText (Application.dataPath + "/Resources/myJson.json");//(1)
+		jsonData = JsonMapper.ToObject (jsonString);//(2)
 
-		//新增一個物件類型為playerState的變數 loadData
-		answerData loadData = new answerData();
+		ansFunc = (int) jsonData ["ans"] [currentProblem] ["Func"];
+		ansN = (int)jsonData ["ans"] [currentProblem] ["N"];
+		ansM = (int)jsonData ["ans"] [currentProblem] ["M"];
+		ansResult = (int)jsonData ["ans"] [currentProblem] ["Result"];
 
-		//使用JsonUtillty的FromJson方法將存文字轉成Json
-		loadData = JsonUtility.FromJson<answerData>(loadJson);
-
-		//驗證用，將sammaru的位置變更為json內紀錄的位置
-		//GameObject.Find("sammaru").transform.position = loadData.pos;
+		Debug.Log ("ansFunc = " + ansFunc);
+		Debug.Log ("ansN = " + ansN);
+		Debug.Log ("ansM = " + ansM);
+		Debug.Log ("ansResult = " + ansResult);
 	}
+
+	void compareAnswerStairs(){
+		if (currentFunc != ansFunc) {
+			feedbackNum = 1;
+		} else if ((currentFunc == ansFunc) && (currentN != ansN)) {
+			feedbackNum = 2;
+		} else if ((currentFunc == ansFunc) && (currentResult == ansResult)) {
+			feedbackNum = 4;
+		}
+		Debug.Log (feedbackNum);
+	}
+
+	void compareAnswerPCH(){
+		if (currentFunc != ansFunc) {
+			feedbackNum = 1;
+		} else if ((currentFunc == ansFunc) && (currentN != ansN)) {
+			feedbackNum = 2;
+		} else if ((currentFunc == ansFunc) && (currentN == ansN) && (currentM != ansM) && (currentResult == ansResult)) {
+			feedbackNum = 3;
+		}else if ((currentFunc == ansFunc) && (currentN == ansN) && (currentM == ansM) && (currentResult == ansResult)) {
+			feedbackNum = 4;
+		}
+		Debug.Log (feedbackNum);
+	}
+
 
 	public void countResult(){
+		currentFunc = GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn;
 
 
-		int result = 0;
+		if (currentFunc == 1) {
+			
+			currentN = int.Parse (NumStairsT.text);	
+			currentM = -1;
+			currentResult = countStairs (currentN);
+			compareAnswerStairs ();
+			//PrintStairs (currentResult, currentN);
 
-		Debug.Log (GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn);
-		if (GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn == 1) {
-			int n = int.Parse (NumStairsT.text);	
-			result = countStairs (n);
-			PrintStairs (result, n);
-		} else if (GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn == 2) {
-			int n = int.Parse (NumPCH01T.text);
-			int m = int.Parse (NumPCH02T.text);
-			result = countP (n, m);
-			PrintP (result,n , m);
-		} else if (GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn == 3) {
-			int n = int.Parse (NumPCH01T.text);
-			int m = int.Parse (NumPCH02T.text);
-			result = countC (n, m);
-			PrintC (result, n, m);
+		} else if (currentFunc == 2) {
+			
+			currentN = int.Parse (NumPCH01T.text);
+			currentM = int.Parse (NumPCH02T.text);
+			currentResult = countP (currentN, currentM);
+			compareAnswerPCH ();
+			//PrintP (currentResult,currentN , currentM);
+
+		} else if (currentFunc == 3) {
+			
+			currentN = int.Parse (NumPCH01T.text);
+			currentM = int.Parse (NumPCH02T.text);
+			currentResult = countC (currentN, currentM);
+			compareAnswerPCH ();
+			//PrintC (currentResult, currentN, currentM);
+
 		}
-		else if (GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn == 4) {
-			int n = int.Parse (NumPCH01T.text);
-			int m = int.Parse (NumPCH02T.text);
-			result = countH (n, m);
-			PrintH (result, n, m, n+m-1);
+		else if (currentFunc == 4) {
+			
+			currentN = int.Parse (NumPCH01T.text);
+			currentM = int.Parse (NumPCH02T.text);
+			currentResult = countH (currentN, currentM);
+			compareAnswerPCH ();
+			//PrintH (currentResult, currentN, currentM, currentN+currentM-1);
+
 		}
 
 
