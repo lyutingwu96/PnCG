@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CalculusManager : MonoBehaviour {
+public class CalculatorManager : MonoBehaviour {
 
 	public GameObject C;
+	public GameObject CScript;
 
 	// Use this for initialization
 	void Start () {
@@ -21,9 +22,11 @@ public class CalculusManager : MonoBehaviour {
 
 	public void CalculatorOn(){
 		C.SetActive (true);
+		CScript.GetComponent<calculator>().enabled = true;
 	}
 	public void CalculatorOff(){
 		C.SetActive (false);
+		CScript.GetComponent<calculator>().enabled = false;
 	}
 
 }

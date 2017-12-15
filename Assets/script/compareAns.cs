@@ -93,7 +93,7 @@ public class compareAns : MonoBehaviour {
 		if (currentResult == ansResult) {
 			feedbackNum = 4;
 		} else {
-			feedbackNum = 1;
+			feedbackNum = 2;
 		}
 		setFBNum ();
 		Debug.Log (feedbackNum);
