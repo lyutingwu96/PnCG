@@ -85,7 +85,7 @@ public class compareAns : MonoBehaviour {
 
 
 	void callFlowchartBlock(){
-		Block target = flowchart.FindBlock ("AnsFeedBack");
+		Block target = flowchart.FindBlock ("ansFeedback");
 		flowchart.ExecuteBlock (target);
 	}
 
@@ -97,6 +97,7 @@ public class compareAns : MonoBehaviour {
 		}
 		setFBNum ();
 		Debug.Log (feedbackNum);
+		callFlowchartBlock ();
 
 	}
 
