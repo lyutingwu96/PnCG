@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Fungus;
 
 public class calculator : MonoBehaviour {
 	
+	public Flowchart flowchart;
+
 	public GameObject SkillFrameStairs;
 	public GameObject SkillFramePCH;
 	public GameObject SkillStairs;
@@ -14,6 +17,7 @@ public class calculator : MonoBehaviour {
 	public GameObject NumberFrameStairs;
 	public GameObject NumberFramePCH1;
 	public GameObject NumberFramePCH2;
+	public GameObject NumberFrameFP;
 
 
 	public GameObject SkillChartStairs;
@@ -25,29 +29,58 @@ public class calculator : MonoBehaviour {
 	[SerializeField] private Text NumStairs = null;
 	[SerializeField] private Text NumPCH01 = null;
 	[SerializeField] private Text NumPCH02 = null;
+	[SerializeField] private Text NumFP = null;
 	public GameObject ansSubmitB;
 
 	public int FrameOn = 0;
+	private int skillsNum;
+	private bool firstProblem;
 
 	void Start(){
-		SkillChartStairs.GetComponent<Button> ().enabled = true;
-		SkillChartP.GetComponent<Button> ().enabled = true;
-		SkillChartC.GetComponent<Button> ().enabled = true;
-		SkillChartH.GetComponent<Button> ().enabled = true;
+		getFlowchartNums ();
+
+		if ((skillsNum == 4) && !firstProblem) {
+			SkillChartStairs.SetActive (true);
+			SkillChartP.SetActive (true);
+			SkillChartC.SetActive (true);
+			SkillChartH.SetActive (true);
+		} else if ((skillsNum == 3) && !firstProblem) {
+			SkillChartStairs.SetActive (true);
+			SkillChartP.SetActive (true);
+			SkillChartC.SetActive (true);
+		} else if ((skillsNum == 2) && !firstProblem) {
+			SkillChartStairs.SetActive (true);
+			SkillChartP.SetActive (true);
+		} else if ((skillsNum == 1) && !firstProblem) {
+			SkillChartStairs.SetActive (true);
+		} else {
+			NW.SetActive (true);
+			NumberFrameFP.SetActive (true);
+		}
 	}
 
 	void Update(){
-		if (NumStairs.text != " ") {
-			ansSubmitB.SetActive(true);
-		}else if( (NumPCH01.text != " ") && (NumPCH02.text != " ") && (int.Parse(NumPCH01.text) >= int.Parse(NumPCH02.text)) && GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn == 2){
-			ansSubmitB.SetActive(true);
-		}else if( (NumPCH01.text != " ") && (NumPCH02.text != " ") && (int.Parse(NumPCH01.text) >= int.Parse(NumPCH02.text)) && GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn == 3){
-			ansSubmitB.SetActive(true);
-		}else if( (NumPCH01.text != " ") && (NumPCH02.text != " ") && ((int.Parse(NumPCH01.text)+int.Parse(NumPCH02.text)-1) >= int.Parse(NumPCH02.text)) && GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn == 4){
-			ansSubmitB.SetActive(true);
-		}else{
-			ansSubmitB.SetActive(false);
+		if (firstProblem) {
+			if (NumFP.text != " ") {
+				ansSubmitB.SetActive (true);
+			}
+		} else {
+			if (NumStairs.text != " ") {
+				ansSubmitB.SetActive (true);
+			} else if ((NumPCH01.text != " ") && (NumPCH02.text != " ") && (int.Parse (NumPCH01.text) >= int.Parse (NumPCH02.text)) && GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn == 2) {
+				ansSubmitB.SetActive (true);
+			} else if ((NumPCH01.text != " ") && (NumPCH02.text != " ") && (int.Parse (NumPCH01.text) >= int.Parse (NumPCH02.text)) && GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn == 3) {
+				ansSubmitB.SetActive (true);
+			} else if ((NumPCH01.text != " ") && (NumPCH02.text != " ") && ((int.Parse (NumPCH01.text) + int.Parse (NumPCH02.text) - 1) >= int.Parse (NumPCH02.text)) && GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn == 4) {
+				ansSubmitB.SetActive (true);
+			} else {
+				ansSubmitB.SetActive (false);
+			}
 		}
+	}
+	void getFlowchartNums(){
+		skillsNum = flowchart.GetIntegerVariable ("SkillsNum");
+		firstProblem = flowchart.GetBooleanVariable ("FirstProblem");
 	}
 
 	//!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -109,10 +142,21 @@ public class calculator : MonoBehaviour {
 		NW.SetActive(true);
 	}
 	public void SkillChartDisplay(){
-		SkillChartStairs.SetActive(true);
-		SkillChartP.SetActive(true);
-		SkillChartC.SetActive(true);
-		SkillChartH.SetActive(true);
+		if ((skillsNum == 4) && !firstProblem) {
+			SkillChartStairs.SetActive (true);
+			SkillChartP.SetActive (true);
+			SkillChartC.SetActive (true);
+			SkillChartH.SetActive (true);
+		} else if ((skillsNum == 3) && !firstProblem) {
+			SkillChartStairs.SetActive (true);
+			SkillChartP.SetActive (true);
+			SkillChartC.SetActive (true);
+		} else if ((skillsNum == 2) && !firstProblem) {
+			SkillChartStairs.SetActive (true);
+			SkillChartP.SetActive (true);
+		} else if ((skillsNum == 1) && !firstProblem) {
+			SkillChartStairs.SetActive (true);
+		}
 		NW.SetActive(false);
 	}
 }

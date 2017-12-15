@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-using SimpleJSON;
 using LitJson;
 using Fungus;
 
@@ -20,6 +19,7 @@ public class compareAns : MonoBehaviour {
 	public GameObject NumberFrameStairs;
 	public GameObject NumberFramePCH1;
 	public GameObject NumberFramePCH2;
+	public GameObject NumberFrameFP;
 
 
 	public GameObject SkillChartStairs;
@@ -32,9 +32,12 @@ public class compareAns : MonoBehaviour {
 	[SerializeField] private Text NumStairsT = null;
 	[SerializeField] private Text NumPCH01T = null;
 	[SerializeField] private Text NumPCH02T = null;
+	[SerializeField] private Text NumFPT = null;
 	[SerializeField] private Text Result = null;
 
-	public int currentProblem = 0;
+	private int currentProblem;
+	private bool firstProblem;
+
 	private int currentFunc;
 
 	private int currentN;
@@ -51,8 +54,12 @@ public class compareAns : MonoBehaviour {
 	private string jsonString;
 	private JsonData jsonData;
 	void Start () {
-		
+		getFlowchartNums ();
 		searchAnswer ();
+	}
+	void getFlowchartNums(){
+		firstProblem = flowchart.GetBooleanVariable ("FirstProblem");
+		currentProblem = flowchart.GetIntegerVariable ("CurrentProblem");
 	}
 
 	public void searchAnswer(){
@@ -76,9 +83,21 @@ public class compareAns : MonoBehaviour {
 		Debug.Log ("FBNumNow = " + FBNumNow);
 	}
 
+
 	void callFlowchartBlock(){
 		Block target = flowchart.FindBlock ("AnsFeedBack");
 		flowchart.ExecuteBlock (target);
+	}
+
+	void compareAnswerFP(){
+		if (currentResult == ansResult) {
+			feedbackNum = 4;
+		} else {
+			feedbackNum = 1;
+		}
+		setFBNum ();
+		Debug.Log (feedbackNum);
+
 	}
 
 	void compareAnswerStairs(){
@@ -112,41 +131,44 @@ public class compareAns : MonoBehaviour {
 
 	public void countResult(){
 		currentFunc = GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn;
+		if (firstProblem) {
+			currentResult = int.Parse (NumFPT.text);
+			compareAnswerFP ();
+		} else {
 
-
-		if (currentFunc == 1) {
+			if (currentFunc == 1) {
 			
-			currentN = int.Parse (NumStairsT.text);	
-			currentM = -1;
-			currentResult = countStairs (currentN);
-			compareAnswerStairs ();
-			//PrintStairs (currentResult, currentN);
+				currentN = int.Parse (NumStairsT.text);	
+				currentM = -1;
+				currentResult = countStairs (currentN);
+				compareAnswerStairs ();
+				//PrintStairs (currentResult, currentN);
 
-		} else if (currentFunc == 2) {
+			} else if (currentFunc == 2) {
 			
-			currentN = int.Parse (NumPCH01T.text);
-			currentM = int.Parse (NumPCH02T.text);
-			currentResult = countP (currentN, currentM);
-			compareAnswerPCH ();
-			//PrintP (currentResult,currentN , currentM);
+				currentN = int.Parse (NumPCH01T.text);
+				currentM = int.Parse (NumPCH02T.text);
+				currentResult = countP (currentN, currentM);
+				compareAnswerPCH ();
+				//PrintP (currentResult,currentN , currentM);
 
-		} else if (currentFunc == 3) {
+			} else if (currentFunc == 3) {
 			
-			currentN = int.Parse (NumPCH01T.text);
-			currentM = int.Parse (NumPCH02T.text);
-			currentResult = countC (currentN, currentM);
-			compareAnswerPCH ();
-			//PrintC (currentResult, currentN, currentM);
+				currentN = int.Parse (NumPCH01T.text);
+				currentM = int.Parse (NumPCH02T.text);
+				currentResult = countC (currentN, currentM);
+				compareAnswerPCH ();
+				//PrintC (currentResult, currentN, currentM);
 
-		}
-		else if (currentFunc == 4) {
+			} else if (currentFunc == 4) {
 			
-			currentN = int.Parse (NumPCH01T.text);
-			currentM = int.Parse (NumPCH02T.text);
-			currentResult = countH (currentN, currentM);
-			compareAnswerPCH ();
-			//PrintH (currentResult, currentN, currentM, currentN+currentM-1);
+				currentN = int.Parse (NumPCH01T.text);
+				currentM = int.Parse (NumPCH02T.text);
+				currentResult = countH (currentN, currentM);
+				compareAnswerPCH ();
+				//PrintH (currentResult, currentN, currentM, currentN+currentM-1);
 
+			}
 		}
 
 
@@ -159,12 +181,15 @@ public class compareAns : MonoBehaviour {
 		NumberFrameStairs.SetActive (false);
 		NumberFramePCH1.SetActive (false);
 		NumberFramePCH2.SetActive (false);
+		NumberFrameFP.SetActive (false);
+
+		NW.transform.Rotate (new Vector3 (NW.transform.rotation.x, NW.transform.rotation.y, -NW.transform.eulerAngles.z));
 		NW.SetActive (false);
 
-		SkillChartStairs.SetActive (true);
-		SkillChartP.SetActive (true);
-		SkillChartC.SetActive (true);
-		SkillChartH.SetActive (true);
+		SkillChartStairs.SetActive (false);
+		SkillChartP.SetActive (false);
+		SkillChartC.SetActive (false);
+		SkillChartH.SetActive (false);
 
 		SkillChartStairs.GetComponent<Button> ().enabled = false;
 		SkillChartP.GetComponent<Button> ().enabled = false;
