@@ -76,6 +76,11 @@ public class compareAns : MonoBehaviour {
 		Debug.Log ("FBNumNow = " + FBNumNow);
 	}
 
+	void callFlowchartBlock(){
+		Block target = flowchart.FindBlock ("AnsFeedBack");
+		flowchart.ExecuteBlock (target);
+	}
+
 	void compareAnswerStairs(){
 		if (currentFunc != ansFunc) {
 			feedbackNum = 1;
@@ -86,6 +91,7 @@ public class compareAns : MonoBehaviour {
 		}
 		setFBNum ();
 		Debug.Log (feedbackNum);
+		callFlowchartBlock ();
 	}
 
 	void compareAnswerPCH(){
@@ -100,6 +106,7 @@ public class compareAns : MonoBehaviour {
 		}
 		setFBNum ();
 		Debug.Log (feedbackNum);
+		callFlowchartBlock ();
 	}
 
 
