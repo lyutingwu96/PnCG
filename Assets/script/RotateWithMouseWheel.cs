@@ -2,22 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Fungus;
 
 public class RotateWithMouseWheel : MonoBehaviour {
+
+	public Flowchart flowchart;
+	private bool firstProblem;
 
 	[SerializeField] private float rotateSpeed;
 	[SerializeField] private Text NumStairs = null;
 	[SerializeField] private Text NumPCH01 = null;
 	[SerializeField] private Text NumPCH02 = null;
+	[SerializeField] private Text NumFP = null;
 
 
 	private int currentText = 0;
 	private string num;
 
 	void Start(){
+		getFlowchartNums ();
 		NumStairs.text = " ";
 		NumPCH01.text = " ";
 		NumPCH02.text = " ";
+		NumFP.text = " ";
 	}
 
 	void Update () {
@@ -78,12 +85,21 @@ public class RotateWithMouseWheel : MonoBehaviour {
 
 		if (currentText == 1) {
 			NumStairs.text = num;
-		}else if (currentText == 2) {
+		} else if (currentText == 2) {
 			NumPCH01.text = num;
-		}else if (currentText == 3) {
+		} else if (currentText == 3) {
 			NumPCH02.text = num;
+		} else if (currentText == 0) {
+			NumFP.text = num;
 		}
 			
+	}
+
+	void getFlowchartNums(){
+		firstProblem = flowchart.GetBooleanVariable ("FirstProblem");
+		if (firstProblem) {
+			currentText = 0;
+		}
 	}
 
 	public void currentStairs(){
