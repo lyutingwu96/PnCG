@@ -19,7 +19,7 @@ public class RotateWithMouseWheel : MonoBehaviour {
 	private int currentText = 0;
 	private string num;
 
-	void Start(){
+	void OnEnable(){
 		getFlowchartNums ();
 		NumStairs.text = " ";
 		NumPCH01.text = " ";

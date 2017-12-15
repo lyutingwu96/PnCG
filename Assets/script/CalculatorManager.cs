@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class CalculatorManager : MonoBehaviour {
 
 	public GameObject C;
-	public GameObject CScript;
+	public GameObject Selected;
+	public GameObject ansSubmitBut;
+	public GameObject NW;
 
 	// Use this for initialization
 	void Start () {
@@ -22,11 +24,16 @@ public class CalculatorManager : MonoBehaviour {
 
 	public void CalculatorOn(){
 		C.SetActive (true);
-		CScript.GetComponent<calculator>().enabled = true;
+		Selected.SetActive (true);
+		//Selected.GetComponent<calculator>().enabled = true;
 	}
 	public void CalculatorOff(){
 		C.SetActive (false);
-		CScript.GetComponent<calculator>().enabled = false;
+		Selected.SetActive (false);
+		ansSubmitBut.SetActive (false);
+		//Selected.GetComponent<calculator>().enabled = false;
+		//ansSubmitBut.GetComponent<compareAns>().enabled = false;
+		//NW.GetComponent<RotateWithMouseWheel>().enabled = false;
 	}
 
 }

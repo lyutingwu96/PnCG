@@ -27,7 +27,7 @@ public class compareAns : MonoBehaviour {
 	public GameObject SkillChartC;
 	public GameObject SkillChartH;
 	public GameObject NW;
-	public GameObject ansBUt;
+	public GameObject ansSubmitB;
 
 	[SerializeField] private Text NumStairsT = null;
 	[SerializeField] private Text NumPCH01T = null;
@@ -53,10 +53,14 @@ public class compareAns : MonoBehaviour {
 
 	private string jsonString;
 	private JsonData jsonData;
-	void Start () {
+
+
+	void OnEnable () {
 		getFlowchartNums ();
 		searchAnswer ();
 	}
+
+
 	void getFlowchartNums(){
 		firstProblem = flowchart.GetBooleanVariable ("FirstProblem");
 		currentProblem = flowchart.GetIntegerVariable ("CurrentProblem");
@@ -197,8 +201,6 @@ public class compareAns : MonoBehaviour {
 		SkillChartC.GetComponent<Button> ().enabled = false;
 		SkillChartH.GetComponent<Button> ().enabled = false;
 
-		ansBUt.GetComponent<Image> ().enabled = false;
-		ansBUt.GetComponent<Button> ().enabled = false;
 
 	}
 

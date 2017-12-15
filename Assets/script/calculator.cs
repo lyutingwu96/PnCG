@@ -36,9 +36,9 @@ public class calculator : MonoBehaviour {
 	private int skillsNum;
 	private bool firstProblem;
 
-	void Start(){
+	void OnEnable(){
 		getFlowchartNums ();
-
+		Debug.Log ("enabled");
 		if ((skillsNum == 4) && !firstProblem) {
 			SkillChartStairs.SetActive (true);
 			SkillChartP.SetActive (true);
@@ -55,6 +55,7 @@ public class calculator : MonoBehaviour {
 			SkillChartStairs.SetActive (true);
 		} else {
 			NW.SetActive (true);
+			//NW.GetComponent<RotateWithMouseWheel>().enabled = true;
 			NumberFrameFP.SetActive (true);
 		}
 	}
@@ -63,18 +64,24 @@ public class calculator : MonoBehaviour {
 		if (firstProblem) {
 			if (NumFP.text != " ") {
 				ansSubmitB.SetActive (true);
+				//ansSubmitB.GetComponent<compareAns>().enabled = true;
 			}
 		} else {
 			if (NumStairs.text != " ") {
 				ansSubmitB.SetActive (true);
+				//ansSubmitB.GetComponent<compareAns>().enabled = true;
 			} else if ((NumPCH01.text != " ") && (NumPCH02.text != " ") && (int.Parse (NumPCH01.text) >= int.Parse (NumPCH02.text)) && GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn == 2) {
 				ansSubmitB.SetActive (true);
+				//ansSubmitB.GetComponent<compareAns>().enabled = true;
 			} else if ((NumPCH01.text != " ") && (NumPCH02.text != " ") && (int.Parse (NumPCH01.text) >= int.Parse (NumPCH02.text)) && GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn == 3) {
 				ansSubmitB.SetActive (true);
+				//ansSubmitB.GetComponent<compareAns>().enabled = true;
 			} else if ((NumPCH01.text != " ") && (NumPCH02.text != " ") && ((int.Parse (NumPCH01.text) + int.Parse (NumPCH02.text) - 1) >= int.Parse (NumPCH02.text)) && GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn == 4) {
 				ansSubmitB.SetActive (true);
+				//ansSubmitB.GetComponent<compareAns>().enabled = true;
 			} else {
 				ansSubmitB.SetActive (false);
+				//ansSubmitB.GetComponent<compareAns>().enabled = false;
 			}
 		}
 	}
@@ -140,6 +147,7 @@ public class calculator : MonoBehaviour {
 		SkillChartC.SetActive(false);
 		SkillChartH.SetActive(false);
 		NW.SetActive(true);
+		//NW.GetComponent<RotateWithMouseWheel>().enabled = true;
 	}
 	public void SkillChartDisplay(){
 		if ((skillsNum == 4) && !firstProblem) {
@@ -158,5 +166,6 @@ public class calculator : MonoBehaviour {
 			SkillChartStairs.SetActive (true);
 		}
 		NW.SetActive(false);
+		//NW.GetComponent<RotateWithMouseWheel>().enabled = false;
 	}
 }
