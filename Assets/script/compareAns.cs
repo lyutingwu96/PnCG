@@ -5,8 +5,11 @@ using UnityEngine.UI;
 using System.IO;
 using SimpleJSON;
 using LitJson;
+using Fungus;
 
 public class compareAns : MonoBehaviour {
+
+	public Flowchart flowchart;
 
 	public GameObject SkillFrameStairs;
 	public GameObject SkillFramePCH;
@@ -67,6 +70,12 @@ public class compareAns : MonoBehaviour {
 		Debug.Log ("ansResult = " + ansResult);
 	}
 
+	void setFBNum(){
+		flowchart.SetIntegerVariable ("FBNum",feedbackNum);
+		int FBNumNow = flowchart.GetIntegerVariable ("FBNum");
+		Debug.Log ("FBNumNow = " + FBNumNow);
+	}
+
 	void compareAnswerStairs(){
 		if (currentFunc != ansFunc) {
 			feedbackNum = 1;
@@ -75,6 +84,7 @@ public class compareAns : MonoBehaviour {
 		} else if ((currentFunc == ansFunc) && (currentResult == ansResult)) {
 			feedbackNum = 4;
 		}
+		setFBNum ();
 		Debug.Log (feedbackNum);
 	}
 
@@ -88,6 +98,7 @@ public class compareAns : MonoBehaviour {
 		}else if ((currentFunc == ansFunc) && (currentN == ansN) && (currentM == ansM) && (currentResult == ansResult)) {
 			feedbackNum = 4;
 		}
+		setFBNum ();
 		Debug.Log (feedbackNum);
 	}
 
