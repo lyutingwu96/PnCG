@@ -89,7 +89,10 @@ public class compareAns : MonoBehaviour {
 
 
 	void callFlowchartBlock(){
-		Block target = flowchart.FindBlock ("ansFeedback");
+		int ChapNum=flowchart.GetIntegerVariable ("CurrentChap");
+		int ProblemNum=flowchart.GetIntegerVariable ("ChapProblem");
+		string targetname = "ansFeedback" + ChapNum + "-" + ProblemNum;
+		Block target = flowchart.FindBlock (targetname);
 		flowchart.ExecuteBlock (target);
 	}
 
