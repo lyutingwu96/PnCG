@@ -2,6 +2,6 @@
 	"ans":[
 		{"Func":1, "N":3, "M":-1, "Result":6},
 		{"Func":1, "N":5, "M":-1, "Result":120},
-		{"Func":1, "N":7, "M":-1, "Result":5040}
+		{"Func":-1, "N":2, "M":4, "Result":-1}
 	]
 }

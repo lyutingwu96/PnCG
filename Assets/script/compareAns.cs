@@ -20,6 +20,8 @@ public class compareAns : MonoBehaviour {
 	public GameObject NumberFramePCH1;
 	public GameObject NumberFramePCH2;
 	public GameObject NumberFrameFP;
+	public GameObject NumberFrameFP201;
+	public GameObject NumberFrameFP202;
 
 
 	public GameObject SkillChartStairs;
@@ -33,6 +35,8 @@ public class compareAns : MonoBehaviour {
 	[SerializeField] private Text NumPCH01T = null;
 	[SerializeField] private Text NumPCH02T = null;
 	[SerializeField] private Text NumFPT = null;
+	[SerializeField] private Text NumFP201T = null;
+	[SerializeField] private Text NumFP202T = null;
 	[SerializeField] private Text Result = null;
 
 	private int currentProblem;
@@ -108,6 +112,18 @@ public class compareAns : MonoBehaviour {
 
 	}
 
+	void compareAnswerFP2(){
+		if ((currentN == ansN)&&(currentM == ansM)) {
+			feedbackNum = 4;
+		} else {
+			feedbackNum = 2;
+		}
+		setFBNum ();
+		Debug.Log (feedbackNum);
+		callFlowchartBlock ();
+
+	}
+
 	void compareAnswerStairs(){
 		if (currentFunc != ansFunc) {
 			feedbackNum = 1;
@@ -140,8 +156,14 @@ public class compareAns : MonoBehaviour {
 	public void countResult(){
 		currentFunc = GameObject.Find ("Selected").GetComponent<calculator> ().FrameOn;
 		if (firstProblem) {
-			currentResult = int.Parse (NumFPT.text);
-			compareAnswerFP ();
+			if (currentProblem == 2) {
+				currentN = int.Parse (NumFP201T.text);
+				currentM = int.Parse (NumFP202T.text);
+				compareAnswerFP2 ();
+			} else {
+				currentResult = int.Parse (NumFPT.text);
+				compareAnswerFP ();
+			}
 		} else {
 
 			if (currentFunc == 1) {

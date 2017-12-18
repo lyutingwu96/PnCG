@@ -18,6 +18,8 @@ public class calculator : MonoBehaviour {
 	public GameObject NumberFramePCH1;
 	public GameObject NumberFramePCH2;
 	public GameObject NumberFrameFP;
+	public GameObject NumberFrameFP201;
+	public GameObject NumberFrameFP202;
 
 
 	public GameObject SkillChartStairs;
@@ -30,10 +32,13 @@ public class calculator : MonoBehaviour {
 	[SerializeField] private Text NumPCH01 = null;
 	[SerializeField] private Text NumPCH02 = null;
 	[SerializeField] private Text NumFP = null;
+	[SerializeField] private Text NumFP201 = null;
+	[SerializeField] private Text NumFP202 = null;
 	public GameObject ansSubmitB;
 
 	public int FrameOn = 0;
 	private int skillsNum;
+	private int currentProblem;
 	private bool firstProblem;
 
 	void OnEnable(){
@@ -53,7 +58,12 @@ public class calculator : MonoBehaviour {
 			SkillChartP.SetActive (true);
 		} else if ((skillsNum == 1) && !firstProblem) {
 			SkillChartStairs.SetActive (true);
-		} else {
+		} else if(currentProblem == 2){
+			NW.SetActive (true);
+			//NW.GetComponent<RotateWithMouseWheel>().enabled = true;
+			NumberFrameFP201.SetActive (true);
+			NumberFrameFP202.SetActive (true);
+		}else {
 			NW.SetActive (true);
 			//NW.GetComponent<RotateWithMouseWheel>().enabled = true;
 			NumberFrameFP.SetActive (true);
@@ -62,9 +72,15 @@ public class calculator : MonoBehaviour {
 
 	void Update(){
 		if (firstProblem) {
+			if (currentProblem == 2) {
+				if ((NumFP201.text != " ") && (NumFP202.text != " ")) {
+					ansSubmitB.SetActive (true);
+				}
+			}else{
 			if (NumFP.text != " ") {
 				ansSubmitB.SetActive (true);
 				//ansSubmitB.GetComponent<compareAns>().enabled = true;
+				}
 			}
 		} else {
 			if (NumStairs.text != " ") {
@@ -88,6 +104,7 @@ public class calculator : MonoBehaviour {
 	void getFlowchartNums(){
 		skillsNum = flowchart.GetIntegerVariable ("SkillsNum");
 		firstProblem = flowchart.GetBooleanVariable ("FirstProblem");
+		currentProblem = flowchart.GetIntegerVariable ("CurrentProblem");
 	}
 
 	//!!!!!!!!!!!!!!!!!!!!!!!!!

@@ -8,12 +8,15 @@ public class RotateWithMouseWheel : MonoBehaviour {
 
 	public Flowchart flowchart;
 	private bool firstProblem;
+	private int currentProblem;
 
 	[SerializeField] private float rotateSpeed;
 	[SerializeField] private Text NumStairs = null;
 	[SerializeField] private Text NumPCH01 = null;
 	[SerializeField] private Text NumPCH02 = null;
 	[SerializeField] private Text NumFP = null;
+	[SerializeField] private Text NumFP201 = null;
+	[SerializeField] private Text NumFP202 = null;
 
 
 	private int currentText = 0;
@@ -25,6 +28,8 @@ public class RotateWithMouseWheel : MonoBehaviour {
 		NumPCH01.text = " ";
 		NumPCH02.text = " ";
 		NumFP.text = " ";
+		NumFP201.text = " ";
+		NumFP202.text = " ";
 	}
 
 	void Update () {
@@ -89,6 +94,10 @@ public class RotateWithMouseWheel : MonoBehaviour {
 			NumPCH01.text = num;
 		} else if (currentText == 3) {
 			NumPCH02.text = num;
+		}else if (currentText == 4) {
+			NumFP201.text = num;
+		}else if (currentText == 5) {
+			NumFP202.text = num;
 		} else if (currentText == 0) {
 			NumFP.text = num;
 		}
@@ -97,8 +106,12 @@ public class RotateWithMouseWheel : MonoBehaviour {
 
 	void getFlowchartNums(){
 		firstProblem = flowchart.GetBooleanVariable ("FirstProblem");
-		if (firstProblem) {
+		currentProblem = flowchart.GetIntegerVariable ("CurrentProblem");
+
+		if (firstProblem && (currentProblem != 2)) {
 			currentText = 0;
+		} else if (firstProblem && (currentProblem == 2)) {
+			currentText = 4;
 		}
 	}
 
@@ -111,6 +124,12 @@ public class RotateWithMouseWheel : MonoBehaviour {
 	public void currentPCH02(){
 		currentText = 3;
 	}
+	public void currentFP201(){
+		currentText = 4;
+	}
+	public void currentFP202(){
+		currentText = 5;
+	}
 	public void currentReset(){
 		currentText = 0;
 	}
@@ -121,5 +140,6 @@ public class RotateWithMouseWheel : MonoBehaviour {
 	public void numResetPCH(){
 		NumStairs.text = " ";
 	}
+
 		
 }
