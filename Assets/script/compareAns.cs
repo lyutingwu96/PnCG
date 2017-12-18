@@ -199,10 +199,10 @@ public class compareAns : MonoBehaviour {
 		SkillChartC.SetActive (false);
 		SkillChartH.SetActive (false);
 
-		SkillChartStairs.GetComponent<Button> ().enabled = false;
-		SkillChartP.GetComponent<Button> ().enabled = false;
-		SkillChartC.GetComponent<Button> ().enabled = false;
-		SkillChartH.GetComponent<Button> ().enabled = false;
+		//SkillChartStairs.GetComponent<Button> ().enabled = false;
+		//SkillChartP.GetComponent<Button> ().enabled = false;
+		//SkillChartC.GetComponent<Button> ().enabled = false;
+		//SkillChartH.GetComponent<Button> ().enabled = false;
 
 
 	}
