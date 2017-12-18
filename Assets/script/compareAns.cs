@@ -54,6 +54,9 @@ public class compareAns : MonoBehaviour {
 	public int ansResult;
 	public int feedbackNum;
 
+	private bool inExam;
+	private int examScore;
+
 
 	private string jsonString;
 	private JsonData jsonData;
@@ -68,6 +71,8 @@ public class compareAns : MonoBehaviour {
 	void getFlowchartNums(){
 		firstProblem = flowchart.GetBooleanVariable ("FirstProblem");
 		currentProblem = flowchart.GetIntegerVariable ("CurrentProblem");
+		inExam = flowchart.GetBooleanVariable ("InExam");
+		examScore = flowchart.GetIntegerVariable ("ExamScore");
 	}
 
 	public void searchAnswer(){
@@ -90,6 +95,9 @@ public class compareAns : MonoBehaviour {
 		int FBNumNow = flowchart.GetIntegerVariable ("FBNum");
 		Debug.Log ("FBNumNow = " + FBNumNow);
 	}
+	void setExamScore(){
+		flowchart.SetIntegerVariable ("ExamScore",examScore);
+	}
 
 
 	void callFlowchartBlock(){
@@ -103,6 +111,10 @@ public class compareAns : MonoBehaviour {
 	void compareAnswerFP(){
 		if (currentResult == ansResult) {
 			feedbackNum = 4;
+			if (inExam) {
+				examScore += 1;
+				setExamScore ();
+			}
 		} else {
 			feedbackNum = 2;
 		}
@@ -115,6 +127,10 @@ public class compareAns : MonoBehaviour {
 	void compareAnswerFP2(){
 		if ((currentN == ansN)&&(currentM == ansM)) {
 			feedbackNum = 4;
+			if (inExam) {
+				examScore += 1;
+				setExamScore ();
+			}
 		} else {
 			feedbackNum = 2;
 		}
@@ -131,6 +147,10 @@ public class compareAns : MonoBehaviour {
 			feedbackNum = 2;
 		} else if ((currentFunc == ansFunc) && (currentResult == ansResult)) {
 			feedbackNum = 4;
+			if (inExam) {
+				examScore += 1;
+				setExamScore ();
+			}
 		}
 		setFBNum ();
 		Debug.Log (feedbackNum);
@@ -146,6 +166,10 @@ public class compareAns : MonoBehaviour {
 			feedbackNum = 3;
 		}else if ((currentFunc == ansFunc) && (currentN == ansN) && (currentM == ansM) && (currentResult == ansResult)) {
 			feedbackNum = 4;
+			if (inExam) {
+				examScore += 1;
+				setExamScore ();
+			}
 		}
 		setFBNum ();
 		Debug.Log (feedbackNum);

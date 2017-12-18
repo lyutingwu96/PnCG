@@ -27,6 +27,7 @@ public class calculator : MonoBehaviour {
 	public GameObject SkillChartC;
 	public GameObject SkillChartH;
 	public GameObject NW;
+	public GameObject Hearts;
 
 	[SerializeField] private Text NumStairs = null;
 	[SerializeField] private Text NumPCH01 = null;
@@ -40,10 +41,18 @@ public class calculator : MonoBehaviour {
 	private int skillsNum;
 	private int currentProblem;
 	private bool firstProblem;
+	private bool inExam;
 
 	void OnEnable(){
 		getFlowchartNums ();
 		Debug.Log ("enabled");
+
+		if (!inExam) {
+			Hearts.SetActive (true);
+		} else {
+			Hearts.SetActive (false);
+		}
+
 		if ((skillsNum == 4) && !firstProblem) {
 			SkillChartStairs.SetActive (true);
 			SkillChartP.SetActive (true);
@@ -104,6 +113,7 @@ public class calculator : MonoBehaviour {
 	void getFlowchartNums(){
 		skillsNum = flowchart.GetIntegerVariable ("SkillsNum");
 		firstProblem = flowchart.GetBooleanVariable ("FirstProblem");
+		inExam = flowchart.GetBooleanVariable ("InExam");
 		currentProblem = flowchart.GetIntegerVariable ("CurrentProblem");
 	}
 
