@@ -38,6 +38,7 @@ public class compareAns : MonoBehaviour {
 	[SerializeField] private Text NumFP201T = null;
 	[SerializeField] private Text NumFP202T = null;
 	[SerializeField] private Text Result = null;
+	[SerializeField] private Text ResultScore = null;
 
 	private int currentProblem;
 	private bool firstProblem;
@@ -55,7 +56,8 @@ public class compareAns : MonoBehaviour {
 	public int feedbackNum;
 
 	private bool inExam;
-	private int examScore;
+	public float examScore;
+
 
 
 	private string jsonString;
@@ -72,7 +74,7 @@ public class compareAns : MonoBehaviour {
 		firstProblem = flowchart.GetBooleanVariable ("FirstProblem");
 		currentProblem = flowchart.GetIntegerVariable ("CurrentProblem");
 		inExam = flowchart.GetBooleanVariable ("InExam");
-		examScore = flowchart.GetIntegerVariable ("ExamScore");
+		examScore = flowchart.GetFloatVariable ("ExamScore");
 	}
 
 	public void searchAnswer(){
@@ -96,7 +98,7 @@ public class compareAns : MonoBehaviour {
 		Debug.Log ("FBNumNow = " + FBNumNow);
 	}
 	void setExamScore(){
-		flowchart.SetIntegerVariable ("ExamScore",examScore);
+		flowchart.SetFloatVariable ("ExamScore",examScore);
 	}
 
 
@@ -311,5 +313,12 @@ public class compareAns : MonoBehaviour {
 		string p = "";
 		p = "H(" + n + ", " + m + ")\n= C(" + n + " + " + m + " - 1, " + m + ")= " + "C(" + cn + ", " + m + ")\n= " + cn + "! / (" + m + "! (" + cn + " - " + m + ")! )\n= " + result;
 		Result.text = p;
+	}
+	public void PrintExamScore(){
+		string p = "";
+		float score = examScore;
+		score = score * 12.5f;
+		p = "Result Score : " + score;
+		ResultScore.text = p;
 	}
 }
