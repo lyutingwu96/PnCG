@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-
+#if UNITY_EDITOR
+using UnityEditor;
 
 public class main : MonoBehaviour
 {
@@ -94,3 +95,4 @@ public class main : MonoBehaviour
         }
     }
 }
+#endif

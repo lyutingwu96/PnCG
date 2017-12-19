@@ -78,7 +78,7 @@ public class compareAns : MonoBehaviour {
 	}
 
 	public void searchAnswer(){
-		jsonString = File.ReadAllText (Application.dataPath + "/Resources/myJson.json");//(1)
+		jsonString = File.ReadAllText (Application.dataPath + "/StreamingAssets/myJson.json");//(1)
 		jsonData = JsonMapper.ToObject (jsonString);//(2)
 
 		ansFunc = (int) jsonData ["ans"] [currentProblem] ["Func"];
