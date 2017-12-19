@@ -264,6 +264,13 @@ public class compareAns : MonoBehaviour {
 		SkillChartC.SetActive (false);
 		SkillChartH.SetActive (false);
 
+		NumStairsT.text = " ";
+		NumPCH01T.text = " ";
+		NumPCH02T.text = " ";
+		NumFPT.text = " ";
+		NumFP201T.text = " ";
+		NumFP202T.text = " ";
+
 		//SkillChartStairs.GetComponent<Button> ().enabled = false;
 		//SkillChartP.GetComponent<Button> ().enabled = false;
 		//SkillChartC.GetComponent<Button> ().enabled = false;

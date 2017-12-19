@@ -24,12 +24,12 @@ public class RotateWithMouseWheel : MonoBehaviour {
 
 	void OnEnable(){
 		getFlowchartNums ();
-		NumStairs.text = " ";
+		/*NumStairs.text = " ";
 		NumPCH01.text = " ";
 		NumPCH02.text = " ";
 		NumFP.text = " ";
 		NumFP201.text = " ";
-		NumFP202.text = " ";
+		NumFP202.text = " ";*/
 	}
 
 	void Update () {
