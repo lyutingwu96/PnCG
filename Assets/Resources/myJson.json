@@ -4,7 +4,7 @@
 		{"Func":1, "N":5, "M":-1, "Result":120, "num":1},
 		{"Func":-1, "N":1, "M":2, "Result":-1, "num":2},
 		{"Func":2, "N":5, "M":3, "Result":120, "num":3},
-		{"Func":-1, "N":1, "M":3, "Result":120, "num":4},
+		{"Func":-1, "N":6, "M":-1, "Result":3, "num":4},
 		{"Func":3, "N":9, "M":3, "Result":84, "num":5},
 
 		{"Func":1, "N":3, "M":-1, "Result":6, "num":6, "exam":1},
