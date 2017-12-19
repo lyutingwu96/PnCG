@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+using LitJson;
 using Fungus;
 
 public class calculator : MonoBehaviour {
@@ -35,6 +37,10 @@ public class calculator : MonoBehaviour {
 	[SerializeField] private Text NumFP = null;
 	[SerializeField] private Text NumFP201 = null;
 	[SerializeField] private Text NumFP202 = null;
+
+	public GameObject QuestionBG;
+	[SerializeField] private Text question = null;
+
 	public GameObject ansSubmitB;
 
 	public int FrameOn = 0;
@@ -43,8 +49,15 @@ public class calculator : MonoBehaviour {
 	private bool firstProblem;
 	private bool inExam;
 
+	private string jsonString;
+	private JsonData jsonData;
+	private string currentQuestion;
+
 	void OnEnable(){
 		getFlowchartNums ();
+		searchQuestion ();
+		question.text = currentQuestion;
+		QuestionBG.SetActive (true);
 		Debug.Log ("enabled");
 
 		if (!inExam) {
@@ -132,6 +145,13 @@ public class calculator : MonoBehaviour {
 		firstProblem = flowchart.GetBooleanVariable ("FirstProblem");
 		inExam = flowchart.GetBooleanVariable ("InExam");
 		currentProblem = flowchart.GetIntegerVariable ("CurrentProblem");
+	}
+
+	public void searchQuestion(){
+		jsonString = File.ReadAllText (Application.dataPath + "/StreamingAssets/myJson.json");//(1)
+		jsonData = JsonMapper.ToObject (jsonString);//(2)
+
+		currentQuestion = (string)jsonData ["ans"] [currentProblem] ["Text"];
 	}
 
 	//!!!!!!!!!!!!!!!!!!!!!!!!!

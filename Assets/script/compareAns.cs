@@ -30,6 +30,7 @@ public class compareAns : MonoBehaviour {
 	public GameObject SkillChartH;
 	public GameObject NW;
 	public GameObject ansSubmitB;
+	public GameObject QuestionBG;
 
 	[SerializeField] private Text NumStairsT = null;
 	[SerializeField] private Text NumPCH01T = null;
@@ -39,6 +40,7 @@ public class compareAns : MonoBehaviour {
 	[SerializeField] private Text NumFP202T = null;
 	[SerializeField] private Text Result = null;
 	[SerializeField] private Text ResultScore = null;
+	[SerializeField] private Text question = null;
 
 	private int currentProblem;
 	private bool firstProblem;
@@ -270,12 +272,15 @@ public class compareAns : MonoBehaviour {
 		SkillChartC.SetActive (false);
 		SkillChartH.SetActive (false);
 
+		QuestionBG.SetActive (false);
+
 		NumStairsT.text = " ";
 		NumPCH01T.text = " ";
 		NumPCH02T.text = " ";
 		NumFPT.text = " ";
 		NumFP201T.text = " ";
 		NumFP202T.text = " ";
+		question.text = " ";
 
 		//SkillChartStairs.GetComponent<Button> ().enabled = false;
 		//SkillChartP.GetComponent<Button> ().enabled = false;
