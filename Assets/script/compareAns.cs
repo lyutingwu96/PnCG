@@ -238,6 +238,8 @@ public class compareAns : MonoBehaviour {
 		NumberFramePCH1.SetActive (false);
 		NumberFramePCH2.SetActive (false);
 		NumberFrameFP.SetActive (false);
+		NumberFrameFP201.SetActive (false);
+		NumberFrameFP202.SetActive (false);
 
 		NW.transform.Rotate (new Vector3 (NW.transform.rotation.x, NW.transform.rotation.y, -NW.transform.eulerAngles.z));
 		NW.SetActive (false);

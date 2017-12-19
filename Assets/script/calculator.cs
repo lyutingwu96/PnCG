@@ -70,6 +70,7 @@ public class calculator : MonoBehaviour {
 		} else if(currentProblem == 2){
 			NW.SetActive (true);
 			//NW.GetComponent<RotateWithMouseWheel>().enabled = true;
+			NumberFrameFP.SetActive (false);
 			NumberFrameFP201.SetActive (true);
 			NumberFrameFP202.SetActive (true);
 		}else {

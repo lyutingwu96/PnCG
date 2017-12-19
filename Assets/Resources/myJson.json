@@ -2,15 +2,18 @@
 	"ans":[
 		{"Func":-1, "N":3, "M":-1, "Result":6, "num":0},
 		{"Func":1, "N":5, "M":-1, "Result":120, "num":1},
-		{"Func":-1, "N":2, "M":4, "Result":-1, "num":2},
-		{"Func":-1, "N":2, "M":4, "Result":-1, "num":3},
-		{"Func":1, "N":3, "M":-1, "Result":6, "num":4, "exam":1},
-		{"Func":1, "N":5, "M":-1, "Result":120, "num":5, "exam":2},
-		{"Func":3, "N":4, "M":2, "Result":6, "num":6, "exam":3},
-		{"Func":2, "N":9, "M":4, "Result":3024, "num":7, "exam":4},
-		{"Func":3, "N":7, "M":3, "Result":35, "num":8, "exam":5},
-		{"Func":3, "N":8, "M":2, "Result":28, "num":9, "exam":6},
-		{"Func":3, "N":9, "M":3, "Result":84, "num":10, "exam":7},
-		{"Func":2, "N":6, "M":4, "Result":360, "num":11, "exam":8}
+		{"Func":-1, "N":1, "M":2, "Result":-1, "num":2},
+		{"Func":2, "N":5, "M":3, "Result":120, "num":3},
+		{"Func":-1, "N":1, "M":3, "Result":120, "num":4},
+		{"Func":3, "N":9, "M":3, "Result":84, "num":5},
+
+		{"Func":1, "N":3, "M":-1, "Result":6, "num":6, "exam":1},
+		{"Func":1, "N":5, "M":-1, "Result":120, "num":7, "exam":2},
+		{"Func":3, "N":4, "M":2, "Result":6, "num":8, "exam":3},
+		{"Func":2, "N":9, "M":4, "Result":3024, "num":9, "exam":4},
+		{"Func":3, "N":7, "M":3, "Result":35, "num":10, "exam":5},
+		{"Func":3, "N":8, "M":2, "Result":28, "num":11, "exam":6},
+		{"Func":3, "N":9, "M":3, "Result":84, "num":12, "exam":7},
+		{"Func":2, "N":6, "M":4, "Result":360, "num":13, "exam":8}
 	]
 }
