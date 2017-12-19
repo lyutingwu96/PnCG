@@ -58,14 +58,30 @@ public class calculator : MonoBehaviour {
 			SkillChartP.SetActive (true);
 			SkillChartC.SetActive (true);
 			SkillChartH.SetActive (true);
+			NumberFrameFP.SetActive (false);
+			NumberFrameFP201.SetActive (false);
+			NumberFrameFP202.SetActive (false);
+			NW.SetActive (false);
 		} else if ((skillsNum == 3) && !firstProblem) {
+			NumberFrameFP.SetActive (false);
+			NumberFrameFP201.SetActive (false);
+			NumberFrameFP202.SetActive (false);
+			NW.SetActive (false);
 			SkillChartStairs.SetActive (true);
 			SkillChartP.SetActive (true);
 			SkillChartC.SetActive (true);
 		} else if ((skillsNum == 2) && !firstProblem) {
+			NumberFrameFP.SetActive (false);
+			NumberFrameFP201.SetActive (false);
+			NumberFrameFP202.SetActive (false);
+			NW.SetActive (false);
 			SkillChartStairs.SetActive (true);
 			SkillChartP.SetActive (true);
 		} else if ((skillsNum == 1) && !firstProblem) {
+			NumberFrameFP.SetActive (false);
+			NumberFrameFP201.SetActive (false);
+			NumberFrameFP202.SetActive (false);
+			NW.SetActive (false);
 			SkillChartStairs.SetActive (true);
 		} else if(currentProblem == 2){
 			NW.SetActive (true);

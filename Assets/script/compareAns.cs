@@ -103,11 +103,26 @@ public class compareAns : MonoBehaviour {
 
 
 	void callFlowchartBlock(){
-		int ChapNum=flowchart.GetIntegerVariable ("CurrentChap");
-		int ProblemNum=flowchart.GetIntegerVariable ("ChapProblem");
-		string targetname = "ansFeedback" + ChapNum + "-" + ProblemNum;
-		Block target = flowchart.FindBlock (targetname);
-		flowchart.ExecuteBlock (target);
+		bool inEXAMornot = flowchart.GetBooleanVariable ("InExam");
+		if (inEXAMornot == true) {
+			int nowproblem = flowchart.GetIntegerVariable ("CurrentProblem");
+			nowproblem = nowproblem - 4;
+			if (nowproblem == 9) {
+				Block target = flowchart.FindBlock ("SCORE");
+				flowchart.ExecuteBlock (target);
+			} else {
+				string targetname = "Q" + nowproblem;
+				Block target = flowchart.FindBlock (targetname);
+				flowchart.ExecuteBlock (target);
+			}
+
+		} else {
+			int ChapNum=flowchart.GetIntegerVariable ("CurrentChap");
+			int ProblemNum=flowchart.GetIntegerVariable ("ChapProblem");
+			string targetname = "ansFeedback" + ChapNum + "-" + ProblemNum;
+			Block target = flowchart.FindBlock (targetname);
+			flowchart.ExecuteBlock (target);
+		}
 	}
 
 	void compareAnswerFP(){
