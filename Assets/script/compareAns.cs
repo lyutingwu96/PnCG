@@ -179,7 +179,9 @@ public class compareAns : MonoBehaviour {
 			feedbackNum = 1;
 		} else if ((currentFunc == ansFunc) && (currentN != ansN)) {
 			feedbackNum = 2;
-		} else if ((currentFunc == ansFunc) && (currentN == ansN) && (currentM != ansM) && (currentResult == ansResult)) {
+		}else if((currentFunc == ansFunc) && (currentN == ansN) && (currentM != ansM)){
+			feedbackNum = 3;
+		}else if((currentFunc == ansFunc) && (currentN == ansN) && (currentM != ansM) && (currentResult == ansResult)) {
 			feedbackNum = 3;
 		}else if ((currentFunc == ansFunc) && (currentN == ansN) && (currentM == ansM) && (currentResult == ansResult)) {
 			feedbackNum = 4;
@@ -212,6 +214,7 @@ public class compareAns : MonoBehaviour {
 				currentN = int.Parse (NumStairsT.text);	
 				currentM = -1;
 				currentResult = countStairs (currentN);
+
 				compareAnswerStairs ();
 				//PrintStairs (currentResult, currentN);
 
@@ -220,6 +223,7 @@ public class compareAns : MonoBehaviour {
 				currentN = int.Parse (NumPCH01T.text);
 				currentM = int.Parse (NumPCH02T.text);
 				currentResult = countP (currentN, currentM);
+
 				compareAnswerPCH ();
 				//PrintP (currentResult,currentN , currentM);
 
@@ -228,6 +232,7 @@ public class compareAns : MonoBehaviour {
 				currentN = int.Parse (NumPCH01T.text);
 				currentM = int.Parse (NumPCH02T.text);
 				currentResult = countC (currentN, currentM);
+
 				compareAnswerPCH ();
 				//PrintC (currentResult, currentN, currentM);
 
@@ -236,6 +241,7 @@ public class compareAns : MonoBehaviour {
 				currentN = int.Parse (NumPCH01T.text);
 				currentM = int.Parse (NumPCH02T.text);
 				currentResult = countH (currentN, currentM);
+
 				compareAnswerPCH ();
 				//PrintH (currentResult, currentN, currentM, currentN+currentM-1);
 
@@ -287,17 +293,21 @@ public class compareAns : MonoBehaviour {
 			for (int i = 1; i < n; i++) {
 				ans *= i;
 			}
+
 			return ans;
 		}
 	}
 	int countP(int n, int m){
 		int ans = 0;
-		ans = countStairs (n) / countStairs (n - m);
+		int tmp = n - m;
+		ans = countStairs (n) / countStairs (tmp);
+
 		return ans;
 	}
 	int countC(int n, int m){
 		int ans = 0;
-		ans = countStairs (n) / (countStairs (n - m) * countStairs(m));
+		int tmp = n - m;
+		ans = countStairs (n) / (countStairs (tmp) * countStairs(m));
 		return ans;
 	}
 	int countH(int n, int m){
@@ -344,5 +354,9 @@ public class compareAns : MonoBehaviour {
 		score = score * 12.5f;
 		p = "Result Score : " + score;
 		ResultScore.text = p;
+	}
+
+	public void ResultExamScoreReset(){
+		ResultScore.text = " ";
 	}
 }
