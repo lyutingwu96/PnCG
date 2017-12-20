@@ -148,7 +148,9 @@ public class calculator : MonoBehaviour {
 	}
 
 	public void searchQuestion(){
-		jsonString = File.ReadAllText (Application.dataPath + "/StreamingAssets/myJson.json");//(1)
+		string myPath = "/Data/myJson.json";
+		//string myPath = "/StreamingAssets/myJson.json";
+		jsonString = File.ReadAllText (Application.dataPath + myPath);//(1)
 		jsonData = JsonMapper.ToObject (jsonString);//(2)
 
 		currentQuestion = (string)jsonData ["ans"] [currentProblem] ["Text"];
