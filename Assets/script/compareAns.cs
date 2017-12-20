@@ -9,6 +9,7 @@ using Fungus;
 public class compareAns : MonoBehaviour {
 
 	public Flowchart flowchart;
+	public GameObject Calculator;
 
 	public GameObject SkillFrameStairs;
 	public GameObject SkillFramePCH;
@@ -66,6 +67,7 @@ public class compareAns : MonoBehaviour {
 	public int feedbackNum;
 
 	private bool inExam;
+	private bool examLast;
 	public float examScore;
 
 
@@ -84,12 +86,13 @@ public class compareAns : MonoBehaviour {
 		firstProblem = flowchart.GetBooleanVariable ("FirstProblem");
 		currentProblem = flowchart.GetIntegerVariable ("CurrentProblem");
 		inExam = flowchart.GetBooleanVariable ("InExam");
+		examLast = flowchart.GetBooleanVariable ("ExamLast");
 		examScore = flowchart.GetFloatVariable ("ExamScore");
 	}
 
 	public void searchAnswer(){
-		string myPath = "/Data/myJson.json";
-		//string myPath = "/StreamingAssets/myJson.json";
+		//string myPath = "/Data/myJson.json";
+		string myPath = "/StreamingAssets/myJson.json";
 		jsonString = File.ReadAllText (Application.dataPath + myPath);//(1)
 		jsonData = JsonMapper.ToObject (jsonString);//(2)
 
@@ -298,6 +301,10 @@ public class compareAns : MonoBehaviour {
 		PCHTri.enabled = false;
 		FP201Tri.enabled = false;
 		FP202Tri.enabled = false;
+
+		if (inExam && !examLast) {
+			Calculator.GetComponent<CalculatorManager> ().CalculatorOff();
+		}
 
 		//SkillChartStairs.GetComponent<Button> ().enabled = false;
 		//SkillChartP.GetComponent<Button> ().enabled = false;
