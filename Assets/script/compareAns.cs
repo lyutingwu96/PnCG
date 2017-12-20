@@ -10,6 +10,7 @@ public class compareAns : MonoBehaviour {
 
 	public Flowchart flowchart;
 	public GameObject Calculator;
+	public GameObject Answers;
 
 	public GameObject SkillFrameStairs;
 	public GameObject SkillFramePCH;
@@ -91,7 +92,7 @@ public class compareAns : MonoBehaviour {
 	}
 
 	public void searchAnswer(){
-		//string myPath = "/Data/myJson.json";
+		/*//string myPath = "/Data/myJson.json";
 		string myPath = "/StreamingAssets/myJson.json";
 		jsonString = File.ReadAllText (Application.dataPath + myPath);//(1)
 		jsonData = JsonMapper.ToObject (jsonString);//(2)
@@ -99,7 +100,12 @@ public class compareAns : MonoBehaviour {
 		ansFunc = (int) jsonData ["ans"] [currentProblem] ["Func"];
 		ansN = (int)jsonData ["ans"] [currentProblem] ["N"];
 		ansM = (int)jsonData ["ans"] [currentProblem] ["M"];
-		ansResult = (int)jsonData ["ans"] [currentProblem] ["Result"];
+		ansResult = (int)jsonData ["ans"] [currentProblem] ["Result"];*/
+
+		ansFunc = Answers.GetComponent<AnswerSetup> ().answerList [currentProblem].Func;
+		ansN = Answers.GetComponent<AnswerSetup> ().answerList [currentProblem].N;
+		ansM = Answers.GetComponent<AnswerSetup> ().answerList [currentProblem].M;
+		ansResult = Answers.GetComponent<AnswerSetup> ().answerList [currentProblem].Result;
 
 		Debug.Log ("ansFunc = " + ansFunc);
 		Debug.Log ("ansN = " + ansN);
