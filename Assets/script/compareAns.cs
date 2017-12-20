@@ -42,6 +42,14 @@ public class compareAns : MonoBehaviour {
 	[SerializeField] private Text ResultScore = null;
 	[SerializeField] private Text question = null;
 
+	[SerializeField] private Image NumStairsTri = null;
+	[SerializeField] private Image NumPCH01Tri = null;
+	[SerializeField] private Image NumPCH02Tri = null;
+	[SerializeField] private Image StairsTri = null;
+	[SerializeField] private Image PCHTri = null;
+	[SerializeField] private Image FP201Tri = null;
+	[SerializeField] private Image FP202Tri = null;
+
 	private int currentProblem;
 	private bool firstProblem;
 
@@ -281,6 +289,13 @@ public class compareAns : MonoBehaviour {
 		NumFP201T.text = " ";
 		NumFP202T.text = " ";
 		question.text = " ";
+		NumStairsTri.enabled = false;
+		NumPCH01Tri.enabled = false;
+		NumPCH02Tri.enabled = false;
+		StairsTri.enabled = false;
+		PCHTri.enabled = false;
+		FP201Tri.enabled = false;
+		FP202Tri.enabled = false;
 
 		//SkillChartStairs.GetComponent<Button> ().enabled = false;
 		//SkillChartP.GetComponent<Button> ().enabled = false;
