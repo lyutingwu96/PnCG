@@ -88,8 +88,8 @@ public class compareAns : MonoBehaviour {
 	}
 
 	public void searchAnswer(){
-		//string myPath = "/Data/myJson.json";
-		string myPath = "/StreamingAssets/myJson.json";
+		string myPath = "/Data/myJson.json";
+		//string myPath = "/StreamingAssets/myJson.json";
 		jsonString = File.ReadAllText (Application.dataPath + myPath);//(1)
 		jsonData = JsonMapper.ToObject (jsonString);//(2)
 
