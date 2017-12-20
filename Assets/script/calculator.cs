@@ -38,9 +38,6 @@ public class calculator : MonoBehaviour {
 	[SerializeField] private Text NumFP201 = null;
 	[SerializeField] private Text NumFP202 = null;
 
-	[SerializeField] private Image ContinueImg = null;
-	[SerializeField] private Button ContinueBut = null;
-
 	public GameObject QuestionBG;
 	[SerializeField] private Text question = null;
 
@@ -59,9 +56,8 @@ public class calculator : MonoBehaviour {
 	void OnEnable(){
 		getFlowchartNums ();
 		searchQuestion ();
-		ContinueDisabled ();
-		//question.text = currentQuestion;
-		//QuestionBG.SetActive (true);
+		question.text = currentQuestion;
+		QuestionBG.SetActive (true);
 		Debug.Log ("enabled");
 
 		if (!inExam) {
@@ -158,15 +154,6 @@ public class calculator : MonoBehaviour {
 		jsonData = JsonMapper.ToObject (jsonString);//(2)
 
 		currentQuestion = (string)jsonData ["ans"] [currentProblem] ["Text"];
-	}
-
-	public void ContinueDisabled(){
-		ContinueImg.enabled = false;
-		ContinueBut.enabled = false;
-	}
-	public void ContinueEnabled(){
-		ContinueImg.enabled = true;
-		ContinueBut.enabled = true;
 	}
 
 	//!!!!!!!!!!!!!!!!!!!!!!!!!
