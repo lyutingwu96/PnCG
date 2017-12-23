@@ -20,8 +20,8 @@ public class DRAG : MonoBehaviour {
 
 	public void OnDrag(){
 		//transform.position = new Vector3 (Input.mousePosition.x + OffsetX, Input.mousePosition.y + OffsetY);
-		OffsetX = -(transform.position.x - Input.mousePosition.x);
-		OffsetY = -(transform.position.y - Input.mousePosition.y);
+		OffsetX = (transform.position.x - Input.mousePosition.x);
+		OffsetY = (transform.position.y - Input.mousePosition.y);
 		float ang = Mathf.Atan2 (OffsetY,OffsetX) * Mathf.Rad2Deg - baseAngle;
 		transform.rotation = Quaternion.AngleAxis (ang, Vector3.forward);
 	}
