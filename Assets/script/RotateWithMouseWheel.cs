@@ -62,54 +62,7 @@ public class RotateWithMouseWheel : MonoBehaviour {
 		}else if ((currentAngle > 306) && (currentAngle <= 342)) {
 			num = "9";
 		}
-		/*
-		switch ((int)Mathf.Round(transform.eulerAngles.z))
-		{
-		case 0:
-			num = "0";
-			break;
 
-		case 36:
-			num = "1";
-			break;
-
-		case 72:
-			num = "2";
-			break;
-
-		case 108:
-			num = "3";
-			break;
-
-		case 144:
-			num = "4";
-			break;
-
-		case 180:
-			num = "5";
-			break;
-
-		case 216:
-			num = "6";
-			break;
-
-		case 252:
-			num = "7";
-			break;
-
-		case 288:
-			num = "8";
-			break;
-
-		case 324:
-			num = "9";
-			break;
-
-		default:
-			num = " ";
-			break;
-
-		}*/
 
 		if (currentText == 1) {
 			NumStairs.text = num;
